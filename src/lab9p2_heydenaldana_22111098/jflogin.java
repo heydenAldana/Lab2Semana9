@@ -5,15 +5,24 @@
  */
 package lab9p2_heydenaldana_22111098;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author heyde
  */
 public class jflogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jflogin
-     */
+    // variables access
+    Connection conexion;
+    PreparedStatement pst;
+    ResultSet rs;
+    
     public jflogin() {
         initComponents();
     }
@@ -144,6 +153,50 @@ public class jflogin extends javax.swing.JFrame {
 
     private void bentrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bentrarMouseClicked
         // TODO add your handling code here:
+        String user, password;
+        
+        user = tuser.getText();
+        password = new String(tpassword.getPassword());
+        
+        try 
+        {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            conexion = DriverManager.getConnection("jdbc:ucanaccess://./JamesApp.accdb");
+            
+            // hace la busqueda de posibles repetidos
+            pst = conexion.prepareStatement("SELECT username,password from users where username=? and password=?");
+            pst.setString(1, user);
+            pst.setString(2, password);
+            
+            // busca el usuario
+            rs = pst.executeQuery();
+            while(rs.next())
+            {
+                String u = rs.getString("username");
+                String p = rs.getString("password");
+                if(u.equals(user) && p.equals(password))
+                {
+                    lmensaje.setText("INICIO DE SESION EXITOSO");
+                    jfMain main = new jfMain();
+                    main.setVisible(true);
+                    // LIMPIAR FORMULARIO
+                    tuser.setText("");
+                    tpassword.setText("");
+                    this.hide();
+                }
+            }
+            
+            // en caso que no exista
+            lmensaje.setText("LOS DATOS SON INCORRECTOS");
+            tuser.requestFocus();
+            
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "ERROR DE PROGRAMA:\n\n" + ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "ERROR EN SQL\n\n" + ex);
+        } catch (Exception e) {
+            lmensaje.setText("CREO QUE OLVIDO RELLENAR ALGUN CAMPO");
+        }
     }//GEN-LAST:event_bentrarMouseClicked
 
     private void bregistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bregistroMouseClicked

@@ -205,20 +205,28 @@ public class jfregistro extends javax.swing.JFrame {
         age = Integer.parseInt(tage.getText());
         type = (String)cbtype.getSelectedItem();
         
-        
-        // VALIDA si relleno todos los campos
-        if(user.length() == 0 || name.length() == 0 || password.length() == 0 || String.valueOf(age).length() == 0 || age < 0 || type.length() == 0 || cbtype.getSelectedItem() == null)
-        {
-            JOptionPane.showMessageDialog(this, "DEBES RELLENAR TODOS LOS CAMPOS");
-            return;
-        }
         // vamos a agregar el regitro si no existe
         try 
         {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             conexion = DriverManager.getConnection("jdbc:ucanaccess://./JamesApp.accdb");
             
-            pst = conexion.prepareStatement("insert into users (userame,name,password,age,type) values (?,?,?,?,?)");
+            // hace la busqueda de posibles repetidos
+            pst = conexion.prepareStatement("SELECT username from users where username=?");
+            pst.setString(1, user);
+            
+            rs = pst.executeQuery();
+            while(rs.next())
+            {
+                String u = rs.getString("username");
+                if(u.equals(user))
+                {
+                    JOptionPane.showMessageDialog(this, "ESTE USUARIO YA EXISTE");
+                    return;
+                }
+            }
+            
+            pst = conexion.prepareStatement("INSERT into users (username,name,password,age,type) values (?,?,?,?,?)");
             pst.setString(1, user);
             pst.setString(2, name);
             pst.setString(3, password);
@@ -239,7 +247,9 @@ public class jfregistro extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "ERROR DE PROGRAMA:\n\n" + ex);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Este usuario ya existe");
+            JOptionPane.showMessageDialog(this, "ERROR EN SQL\n\n" + ex);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "CREO QUE OLVIDO RELLENAR ALGUN CAMPO O ELEGIR EL TIPO DE USUARIO");
         }
         
     }//GEN-LAST:event_bcrearMouseClicked
