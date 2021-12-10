@@ -28,6 +28,7 @@ public class jfMain extends javax.swing.JFrame {
     
     public jfMain() {
         initComponents();
+        updateTable();
     }
 
     /**
@@ -127,11 +128,11 @@ public class jfMain extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID:", "Nombre", "Contraseña", "Telefono", "Salario:"
+                "username:", "name", "password", "age", "type:"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -215,16 +216,16 @@ public class jfMain extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
+                        .addGap(90, 90, 90)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(buserc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(busere, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buserel, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+                            .addComponent(buserel, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,7 +251,7 @@ public class jfMain extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bvolver, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(618, 618, 618))
+                .addGap(594, 594, 594))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,11 +332,11 @@ public class jfMain extends javax.swing.JFrame {
                 Vector v2 = new Vector();
                 for (int i = 0; i <= c; i++) 
                 {
-                    v2.add(rs.getInt("username"));
+                    v2.add(rs.getString("username"));
                     v2.add(rs.getString("name"));
                     v2.add(rs.getString("password"));
                     v2.add(rs.getInt("age"));
-                    v2.add(rs.getDouble("type"));
+                    v2.add(rs.getString("type"));
                 }
                 dft.addRow(v2);
             }
@@ -356,7 +357,7 @@ public class jfMain extends javax.swing.JFrame {
         tuser.setText(dft.getValueAt(selectedIndex, 0).toString());
         tname.setText(dft.getValueAt(selectedIndex, 1).toString());
         tpassword.setText(dft.getValueAt(selectedIndex, 2).toString());
-        tage.setText(dft.getValueAt(selectedIndex, 3).toString());
+        tage.setText(String.valueOf(dft.getValueAt(selectedIndex, 3)));
 
         if(dft.getValueAt(selectedIndex, 4).toString().equals("USER"))
         ttype.setSelectedIndex(0);

@@ -164,9 +164,10 @@ public class jflogin extends javax.swing.JFrame {
             conexion = DriverManager.getConnection("jdbc:ucanaccess://./JamesApp.accdb");
             
             // hace la busqueda de posibles repetidos
-            pst = conexion.prepareStatement("SELECT username,password from users where username=? and password=?");
+            pst = conexion.prepareStatement("SELECT username,password,type from users where username=? and password=?");
             pst.setString(1, user);
             pst.setString(2, password);
+            
             
             // busca el usuario
             rs = pst.executeQuery();
@@ -174,11 +175,25 @@ public class jflogin extends javax.swing.JFrame {
             {
                 String u = rs.getString("username");
                 String p = rs.getString("password");
+                String t = rs.getString("type");
                 if(u.equals(user) && p.equals(password))
                 {
                     lmensaje.setText("INICIO DE SESION EXITOSO");
-                    jfMain main = new jfMain();
-                    main.setVisible(true);
+                    if(t.equals("ADMIN"))
+                    {
+                        jfMain main = new jfMain();
+                        main.setVisible(true);
+                    }
+                    else if(t.equals("SUPPORT"))
+                    {
+                        jfSupport s = new jfSupport();
+                        s.setVisible(true);
+                    }
+                    else if(t.equals("USER"))
+                    {
+                        jfUser us = new jfUser();
+                        us.setVisible(true);
+                    }
                     // LIMPIAR FORMULARIO
                     tuser.setText("");
                     tpassword.setText("");
