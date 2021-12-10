@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,19 +21,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class jfMain extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jfemployee
-     */
-    public jfMain() {
-        initComponents();
-        updateTable();
-    }
-
-    
     Connection conexion;
     PreparedStatement pst;
     ResultSet rs;
     
+    
+    public jfMain() {
+        initComponents();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,28 +47,31 @@ public class jfMain extends javax.swing.JFrame {
         tpassword = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        tphone = new javax.swing.JTextField();
-        tsalary = new javax.swing.JTextField();
+        tage = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtemp = new javax.swing.JTable();
-        bempc = new javax.swing.JButton();
-        bempe = new javax.swing.JButton();
-        bempel = new javax.swing.JButton();
+        buserc = new javax.swing.JButton();
+        busere = new javax.swing.JButton();
+        buserel = new javax.swing.JButton();
+        ttype = new javax.swing.JComboBox<>();
+        bvolver = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        tuser = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel1.setText("MENU PRINCIPAL - EMPLOYEE REGISTRATION");
+        jLabel1.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        jLabel1.setText("MENU PRINCIPAL - JamesApp");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(148, 148, 148)
+                .addGap(249, 249, 249)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -86,47 +83,42 @@ public class jfMain extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
 
         tname.setBackground(new java.awt.Color(255, 255, 255));
-        tname.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tname.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         tname.setForeground(new java.awt.Color(51, 51, 51));
         tname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(204, 204, 204), null, null));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Nombre:");
 
         tpassword.setBackground(new java.awt.Color(255, 255, 255));
-        tpassword.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tpassword.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         tpassword.setForeground(new java.awt.Color(51, 51, 51));
         tpassword.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(204, 204, 204), null, null));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("Contraseña");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setText("Telefono");
+        jLabel4.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel4.setText("Edad");
 
-        tphone.setBackground(new java.awt.Color(255, 255, 255));
-        tphone.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tphone.setForeground(new java.awt.Color(51, 51, 51));
-        tphone.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(204, 204, 204), null, null));
+        tage.setBackground(new java.awt.Color(255, 255, 255));
+        tage.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        tage.setForeground(new java.awt.Color(51, 51, 51));
+        tage.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(204, 204, 204), null, null));
 
-        tsalary.setBackground(new java.awt.Color(255, 255, 255));
-        tsalary.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tsalary.setForeground(new java.awt.Color(51, 51, 51));
-        tsalary.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(204, 204, 204), null, null));
+        jLabel5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel5.setText("Tipo");
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("Salario");
-
-        jtemp.setBackground(new java.awt.Color(204, 204, 204));
-        jtemp.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtemp.setForeground(new java.awt.Color(51, 51, 51));
+        jtemp.setBackground(new java.awt.Color(0, 153, 153));
+        jtemp.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jtemp.setForeground(new java.awt.Color(204, 204, 204));
         jtemp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -160,69 +152,116 @@ public class jfMain extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtemp);
 
-        bempc.setBackground(new java.awt.Color(153, 153, 153));
-        bempc.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        bempc.setForeground(new java.awt.Color(0, 0, 0));
-        bempc.setText("Agregar empleado");
-        bempc.addMouseListener(new java.awt.event.MouseAdapter() {
+        buserc.setBackground(new java.awt.Color(0, 153, 153));
+        buserc.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        buserc.setForeground(new java.awt.Color(204, 204, 204));
+        buserc.setText("Agregar usuario");
+        buserc.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 255, 255), new java.awt.Color(0, 51, 51)));
+        buserc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bempcMouseClicked(evt);
+                busercMouseClicked(evt);
             }
         });
 
-        bempe.setBackground(new java.awt.Color(153, 153, 153));
-        bempe.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        bempe.setForeground(new java.awt.Color(0, 0, 0));
-        bempe.setText("Editar empleado");
-        bempe.addMouseListener(new java.awt.event.MouseAdapter() {
+        busere.setBackground(new java.awt.Color(0, 153, 153));
+        busere.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        busere.setForeground(new java.awt.Color(204, 204, 204));
+        busere.setText("Editar usuario");
+        busere.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 255, 255), new java.awt.Color(0, 51, 51)));
+        busere.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bempeMouseClicked(evt);
+                busereMouseClicked(evt);
             }
         });
 
-        bempel.setBackground(new java.awt.Color(153, 153, 153));
-        bempel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        bempel.setForeground(new java.awt.Color(0, 0, 0));
-        bempel.setText("Eliminar empleado");
-        bempel.addMouseListener(new java.awt.event.MouseAdapter() {
+        buserel.setBackground(new java.awt.Color(0, 153, 153));
+        buserel.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        buserel.setForeground(new java.awt.Color(204, 204, 204));
+        buserel.setText("Eliminar usuario");
+        buserel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 255, 255), new java.awt.Color(0, 51, 51)));
+        buserel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bempelMouseClicked(evt);
+                buserelMouseClicked(evt);
             }
         });
+
+        ttype.setBackground(new java.awt.Color(255, 255, 255));
+        ttype.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        ttype.setForeground(new java.awt.Color(51, 51, 51));
+        ttype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USER", "SUPPORT" }));
+
+        bvolver.setBackground(new java.awt.Color(255, 153, 153));
+        bvolver.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        bvolver.setForeground(new java.awt.Color(102, 0, 0));
+        bvolver.setText("Salir");
+        bvolver.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 255, 255), new java.awt.Color(0, 51, 51)));
+        bvolver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bvolverMouseClicked(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel6.setText("Username:");
+
+        tuser.setBackground(new java.awt.Color(255, 255, 255));
+        tuser.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        tuser.setForeground(new java.awt.Color(51, 51, 51));
+        tuser.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(204, 204, 204), null, null));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bempc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bempe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bempel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tsalary, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tphone, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tname, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(102, 102, 102)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(buserc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(busere, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buserel, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tage, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tname, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ttype, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tuser, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(27, 27, 27)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bvolver, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(618, 618, 618))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -232,20 +271,24 @@ public class jfMain extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tphone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tsalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(32, 32, 32)
-                        .addComponent(bempc, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bempe, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(bempel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                            .addComponent(jLabel5)
+                            .addComponent(ttype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45)
+                        .addComponent(buserc, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(busere, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buserel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -253,7 +296,7 @@ public class jfMain extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 869, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,131 +310,175 @@ public class jfMain extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bempcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bempcMouseClicked
-        // TODO add your handling code here:
-        String name, password, phone, salary;
-        name = tname.getText();
-        password = tpassword.getText();
-        phone = tphone.getText();
-        salary = tsalary.getText();
-        
-        int iphone = Integer.parseInt(phone);
-        double dsalary = Double.valueOf(salary);
-        
+    public void updateTable()
+    {
         try 
         {
+            int c;
+            
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            conexion = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\heyde\\Documents\\dbemployee.accdb");
+            conexion = DriverManager.getConnection("jdbc:ucanaccess://./JamesApp.accdb");
             
-            pst = conexion.prepareStatement("insert into employees (Nombre,Contraseña,Telefono,Salario) values (?,?,?,?)");
-            pst.setString(1, name);
-            pst.setString(2, password);
-            pst.setInt(3, iphone);
-            pst.setDouble(4, dsalary);
+            pst = conexion.prepareStatement("select * from users");
+            rs = pst.executeQuery();
+            ResultSetMetaData rsd = rs.getMetaData();
+            c = rsd.getColumnCount();
             
-            pst.executeUpdate();
-            updateTable();
-            
-            JOptionPane.showMessageDialog(this, "Registro Agregado");
-            
-            tname.setText("");
-            tpassword.setText("");
-            tphone.setText("");
-            tsalary.setText("");
-            tname.requestFocus();
+            DefaultTableModel dft = (DefaultTableModel)jtemp.getModel();
+            dft.setRowCount(0);
+            while(rs.next())
+            {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= c; i++) 
+                {
+                    v2.add(rs.getInt("username"));
+                    v2.add(rs.getString("name"));
+                    v2.add(rs.getString("password"));
+                    v2.add(rs.getInt("age"));
+                    v2.add(rs.getDouble("type"));
+                }
+                dft.addRow(v2);
+            }
             
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this, ex);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
-        
-        
-    }//GEN-LAST:event_bempcMouseClicked
-
+    }
+    
+    
     private void jtempMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtempMouseClicked
         // TODO add your handling code here:
         DefaultTableModel dft = (DefaultTableModel)jtemp.getModel();
         int selectedIndex = jtemp.getSelectedRow();
-        
-        int ID = Integer.parseInt(dft.getValueAt(selectedIndex, 0).toString());
+
+        tuser.setText(dft.getValueAt(selectedIndex, 0).toString());
         tname.setText(dft.getValueAt(selectedIndex, 1).toString());
         tpassword.setText(dft.getValueAt(selectedIndex, 2).toString());
-        tphone.setText(dft.getValueAt(selectedIndex, 3).toString());
-        tsalary.setText(dft.getValueAt(selectedIndex, 4).toString());
-        
-        
-    }//GEN-LAST:event_jtempMouseClicked
+        tage.setText(dft.getValueAt(selectedIndex, 3).toString());
 
-    private void bempeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bempeMouseClicked
-        // TODO add your handling code here:
-        DefaultTableModel dft = (DefaultTableModel)jtemp.getModel();
-        int selectedIndex = jtemp.getSelectedRow();
-        
-        String name, password, phone, salary;
-        name = tname.getText();
-        password = tpassword.getText();
-        phone = tphone.getText();
-        salary = tsalary.getText();
-        
-        int iphone = Integer.parseInt(phone);
-        int ID = Integer.parseInt(dft.getValueAt(selectedIndex, 0).toString());
-        
-        double dsalary = Double.valueOf(salary);
-        
-        try 
+        if(dft.getValueAt(selectedIndex, 4).toString().equals("USER"))
+        ttype.setSelectedIndex(0);
+        else if(dft.getValueAt(selectedIndex, 4).toString().equals("SUPPORT"))
+        ttype.setSelectedIndex(1);
+        else if(dft.getValueAt(selectedIndex, 4).toString().equals("ADMIN"))
         {
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            conexion = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\heyde\\Documents\\dbemployee.accdb");
-            
-            pst = conexion.prepareStatement("update employees set Nombre=?, Contraseña=?, Telefono=?, Salario=? where ID=? ");
-            pst.setString(1, name);
-            pst.setString(2, password);
-            pst.setInt(3, iphone);
-            pst.setDouble(4, dsalary);
-            pst.setInt(5, ID);
-            pst.executeUpdate();
-            updateTable();
-            
-            JOptionPane.showMessageDialog(this, "Registro Modificado");
-            
+            JOptionPane.showMessageDialog(this, "NO PUEDES MANIPULAR ADMINISTRADORES");
+            // limpiar
+            tuser.setText("");
             tname.setText("");
             tpassword.setText("");
-            tphone.setText("");
-            tsalary.setText("");
+            tage.setText("");
+            ttype.setSelectedItem(0);
+        }
+
+    }//GEN-LAST:event_jtempMouseClicked
+
+    private void busercMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_busercMouseClicked
+        // TODO add your handling code here:
+        String name, password, type;
+        int age;
+        name = tname.getText();
+        password = tpassword.getText();
+        age = Integer.parseInt(tage.getText());
+        type = (String)ttype.getSelectedItem();
+
+        try
+        {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            conexion = DriverManager.getConnection("jdbc:ucanaccess://./JamesApp.accdb");
+
+            pst = conexion.prepareStatement("insert into users (name,password,age,type) values (?,?,?,?)");
+            pst.setString(1, name);
+            pst.setString(2, password);
+            pst.setInt(3, age);
+            pst.setString(4, type);
+
+            pst.executeUpdate();
+            updateTable();
+
+            JOptionPane.showMessageDialog(this, "Registro Agregado");
+
+            tname.setText("");
+            tpassword.setText("");
+            tage.setText("");
+            ttype.setSelectedIndex(0);
             tname.requestFocus();
-            
+
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this, ex);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
-        } 
-    }//GEN-LAST:event_bempeMouseClicked
+        }
 
-    private void bempelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bempelMouseClicked
+    }//GEN-LAST:event_busercMouseClicked
+
+    private void busereMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_busereMouseClicked
         // TODO add your handling code here:
         DefaultTableModel dft = (DefaultTableModel)jtemp.getModel();
         int selectedIndex = jtemp.getSelectedRow();
-        int ID = 0;
-        ID = Integer.parseInt(dft.getValueAt(selectedIndex, 0).toString());
 
-        if(ID == 0)
+        String user, name, password, type;
+        int age;
+        user = tuser.getText();
+        name = tname.getText();
+        password = tpassword.getText();
+        age = Integer.parseInt(tage.getText());
+        type = (String)ttype.getSelectedItem();
+
+        try
+        {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            conexion = DriverManager.getConnection("jdbc:ucanaccess://./JamesApp.accdb");
+
+            pst = conexion.prepareStatement("update users set name=?, password=?, age=?, type=? where username=? ");
+            pst.setString(1, name);
+            pst.setString(2, password);
+            pst.setInt(3, age);
+            pst.setString(4, type);
+            pst.setString(5, user);
+            pst.executeUpdate();
+            updateTable();
+
+            JOptionPane.showMessageDialog(this, "Registro Modificado");
+
+            tname.setText("");
+            tpassword.setText("");
+            tage.setText("");
+            tuser.setText("");
+            tname.requestFocus();
+
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
+    }//GEN-LAST:event_busereMouseClicked
+
+    private void buserelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buserelMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel dft = (DefaultTableModel)jtemp.getModel();
+        int selectedIndex = jtemp.getSelectedRow();
+        String u = (dft.getValueAt(selectedIndex, 0).toString());
+
+        if(u.length() == 0 || u == null)
         {
             JOptionPane.showMessageDialog(this, "DEBE ELEGIR UN REGISTRO DE LA TABLA");
             return;
         }
         int dresult = JOptionPane.showConfirmDialog(null, "¿Estas seguro que quieres eliminar este registro?\n\nNO SE PUEDE DESHACER ESTA ACCION.");
-        
+
         if(dresult == JOptionPane.YES_NO_OPTION)
         {
-            try 
+            try
             {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-                conexion = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\heyde\\Documents\\dbemployee.accdb");
+                conexion = DriverManager.getConnection("jdbc:ucanaccess://./JamesApp.accdb");
 
-                pst = conexion.prepareStatement("delete from employees where ID=? ");
+                pst = conexion.prepareStatement("delete from users where username=? ");
 
-                pst.setInt(1, ID);
+                pst.setString(1, u);
                 pst.executeUpdate();
                 updateTable();
 
@@ -399,17 +486,30 @@ public class jfMain extends javax.swing.JFrame {
 
                 tname.setText("");
                 tpassword.setText("");
-                tphone.setText("");
-                tsalary.setText("");
-                tname.requestFocus();
+                tage.setText("");
+                tuser.setText("");
+                tuser.requestFocus();
 
             } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(this, ex);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, ex);
-            } 
+            }
         }
-    }//GEN-LAST:event_bempelMouseClicked
+    }//GEN-LAST:event_buserelMouseClicked
+
+    private void bvolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bvolverMouseClicked
+        // TODO add your handling code here:
+        jflogin login = new jflogin();
+        login.setVisible(true);
+        // limpiar
+        tname.setText("");
+        tpassword.setText("");
+        tage.setText("");
+        tuser.setText("");
+        tuser.requestFocus();
+        this.hide();
+    }//GEN-LAST:event_bvolverMouseClicked
 
     /**
      * @param args the command line arguments
@@ -447,58 +547,25 @@ public class jfMain extends javax.swing.JFrame {
         });
     }
 
-    public void updateTable()
-    {
-        try 
-        {
-            int c;
-            
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            conexion = DriverManager.getConnection("jdbc:ucanaccess://./JamesApp.accdb");
-            
-            pst = conexion.prepareStatement("select * from employees");
-            rs = pst.executeQuery();
-            ResultSetMetaData rsd = rs.getMetaData();
-            c = rsd.getColumnCount();
-            
-            DefaultTableModel dft = (DefaultTableModel)jtemp.getModel();
-            dft.setRowCount(0);
-            while(rs.next())
-            {
-                Vector v2 = new Vector();
-                for (int i = 0; i <= c; i++) 
-                {
-                    v2.add(rs.getInt("ID"));
-                    v2.add(rs.getString("Nombre"));
-                    v2.add(rs.getString("Contraseña"));
-                    v2.add(rs.getInt("Telefono"));
-                    v2.add(rs.getDouble("Salario"));
-                }
-                dft.addRow(v2);
-            }
-            
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(this, ex);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, ex);
-        }
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bempc;
-    private javax.swing.JButton bempe;
-    private javax.swing.JButton bempel;
+    private javax.swing.JButton buserc;
+    private javax.swing.JButton busere;
+    private javax.swing.JButton buserel;
+    private javax.swing.JButton bvolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtemp;
+    private javax.swing.JTextField tage;
     private javax.swing.JTextField tname;
     private javax.swing.JTextField tpassword;
-    private javax.swing.JTextField tphone;
-    private javax.swing.JTextField tsalary;
+    private javax.swing.JComboBox<String> ttype;
+    private javax.swing.JTextField tuser;
     // End of variables declaration//GEN-END:variables
 }

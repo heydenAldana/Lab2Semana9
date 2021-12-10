@@ -58,21 +58,25 @@ public class jfregistro extends javax.swing.JFrame {
 
         tuser.setBackground(new java.awt.Color(204, 204, 204));
         tuser.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        tuser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         tname.setBackground(new java.awt.Color(204, 204, 204));
         tname.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        tname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel3.setText("Nombres y Apellidos");
 
         tpassword.setBackground(new java.awt.Color(204, 204, 204));
         tpassword.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        tpassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel4.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel4.setText("Contraseña");
 
         tage.setBackground(new java.awt.Color(204, 204, 204));
         tage.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        tage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel5.setText("Edad");
