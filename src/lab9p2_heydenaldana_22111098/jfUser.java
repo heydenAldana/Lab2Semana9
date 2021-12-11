@@ -172,8 +172,16 @@ public class jfUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER)
         {
-            tchat.append(tmensaje.getText());
-            tmensaje.setText("");
+            if(tchat.equals(""))
+            {
+                tchat.setText(tmensaje.getText());
+                tmensaje.setText("");
+            }
+            else if (!tchat.equals(""))
+            {
+                tchat.append("\n" + tmensaje.getText());
+                tmensaje.setText("");
+            }
         }
     }//GEN-LAST:event_tmensajeKeyPressed
 
