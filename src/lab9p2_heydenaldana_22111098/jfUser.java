@@ -169,7 +169,6 @@ public class jfUser extends javax.swing.JFrame {
         l.setVisible(true);
         tmensaje.setText("");
         tchat.setText("");
-        cs.eliminarChat(l.usuario);
         this.hide();
     }//GEN-LAST:event_bsalirMouseClicked
 

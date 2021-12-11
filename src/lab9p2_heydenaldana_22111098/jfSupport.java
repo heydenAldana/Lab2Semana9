@@ -5,19 +5,65 @@
  */
 package lab9p2_heydenaldana_22111098;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author heyde
  */
 public class jfSupport extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jfSupport
-     */
+    Connection conexion;
+    PreparedStatement pst;
+    ResultSet rs;
+    chats cs = new chats();
+    
     public jfSupport() {
         initComponents();
+        rellenarcombobox();
     }
 
+    
+    public void rellenarcombobox()
+    {
+        try 
+        {
+            int c;
+            
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            conexion = DriverManager.getConnection("jdbc:ucanaccess://./JamesApp.accdb");
+            
+            pst = conexion.prepareStatement("select username from users");
+            rs = pst.executeQuery();
+            ResultSetMetaData rsd = rs.getMetaData();
+            c = rsd.getColumnCount();
+            
+            ArrayList<String> v2 = new ArrayList<String>();
+            while(rs.next())
+            {
+                
+                for (int i = 0; i <= c; i++) 
+                {
+                    v2.add(rs.getString("username"));
+                }
+            }
+            cbusers.setModel(new DefaultComboBoxModel(v2.toArray()));
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,7 +87,7 @@ public class jfSupport extends javax.swing.JFrame {
         tage = new javax.swing.JTextField();
         ttype = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        ttype1 = new javax.swing.JComboBox<>();
+        cbusers = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         bborrar1 = new javax.swing.JButton();
 
@@ -142,9 +188,14 @@ public class jfSupport extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("datos del ususario");
 
-        ttype1.setBackground(new java.awt.Color(255, 255, 255));
-        ttype1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        ttype1.setForeground(new java.awt.Color(51, 51, 51));
+        cbusers.setBackground(new java.awt.Color(255, 255, 255));
+        cbusers.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        cbusers.setForeground(new java.awt.Color(51, 51, 51));
+        cbusers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbusersMouseClicked(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(204, 204, 204));
@@ -171,7 +222,7 @@ public class jfSupport extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ttype1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbusers, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(bborrar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,7 +262,7 @@ public class jfSupport extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bborrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ttype1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbusers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -274,8 +325,10 @@ public class jfSupport extends javax.swing.JFrame {
                 tmensaje.setText("");
             }
         }
+        cs.agregaralChat(cbusers.getSelectedItem().toString(), tmensaje.getText());
     }//GEN-LAST:event_tmensajeKeyPressed
 
+    
     private void tmensajeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tmensajeKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_tmensajeKeyTyped
@@ -283,6 +336,7 @@ public class jfSupport extends javax.swing.JFrame {
     private void bborrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bborrarMouseClicked
         // borrar todo en el text area
         tchat.setText("");
+        cs.eliminarChat(cbusers.getSelectedItem().toString());
     }//GEN-LAST:event_bborrarMouseClicked
 
     private void bsalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bsalirMouseClicked
@@ -297,6 +351,38 @@ public class jfSupport extends javax.swing.JFrame {
     private void bborrar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bborrar1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_bborrar1MouseClicked
+
+    private void cbusersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbusersMouseClicked
+        // TODO add your handling code here:
+        try 
+        {
+            int c;
+            
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            conexion = DriverManager.getConnection("jdbc:ucanaccess://./JamesApp.accdb");
+            
+            pst = conexion.prepareStatement("select * from users where username=?");
+            pst.setString(1, cbusers.getSelectedItem().toString());
+            rs = pst.executeQuery();
+            ResultSetMetaData rsd = rs.getMetaData();
+            c = rsd.getColumnCount();
+            
+            while(rs.next())
+            {
+                tuser.setText(rs.getString("username"));
+                tname.setText(rs.getString("name"));
+                tpassword.setText(rs.getString("password"));
+                tage.setText(rs.getString("age"));
+            }
+            
+            tchat.setText(cs.getTodosMensajes(cbusers.getSelectedItem().toString()));
+            
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
+    }//GEN-LAST:event_cbusersMouseClicked
 
     /**
      * @param args the command line arguments
@@ -337,6 +423,7 @@ public class jfSupport extends javax.swing.JFrame {
     private javax.swing.JButton bborrar;
     private javax.swing.JButton bborrar1;
     private javax.swing.JButton bsalir;
+    private javax.swing.JComboBox<String> cbusers;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -349,7 +436,6 @@ public class jfSupport extends javax.swing.JFrame {
     private javax.swing.JTextField tname;
     private javax.swing.JTextField tpassword;
     private javax.swing.JComboBox<String> ttype;
-    private javax.swing.JComboBox<String> ttype1;
     private javax.swing.JTextField tuser;
     // End of variables declaration//GEN-END:variables
 }
