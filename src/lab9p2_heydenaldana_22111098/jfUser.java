@@ -5,15 +5,17 @@
  */
 package lab9p2_heydenaldana_22111098;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author heyde
  */
 public class jfUser extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jfUser
-     */
+    chats cs = new chats();
+    jflogin l = new jflogin();
+    
     public jfUser() {
         initComponents();
     }
@@ -158,14 +160,16 @@ public class jfUser extends javax.swing.JFrame {
     private void bborrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bborrarMouseClicked
         // borrar todo en el text area
         tchat.setText("");
+        if(cs.eliminarChat(l.usuario))
+            JOptionPane.showMessageDialog(this, "CHAT ELIMINADO");
     }//GEN-LAST:event_bborrarMouseClicked
 
     private void bsalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bsalirMouseClicked
         // devuelve al login
-        jflogin l = new jflogin();
         l.setVisible(true);
         tmensaje.setText("");
         tchat.setText("");
+        cs.eliminarChat(l.usuario);
         this.hide();
     }//GEN-LAST:event_bsalirMouseClicked
 
@@ -183,6 +187,8 @@ public class jfUser extends javax.swing.JFrame {
                 tchat.append("\n" + tmensaje.getText());
                 tmensaje.setText("");
             }
+            
+            cs.agregaralChat(l.usuario, tmensaje.getText());
         }
     }//GEN-LAST:event_tmensajeKeyPressed
 

@@ -22,6 +22,9 @@ public class jflogin extends javax.swing.JFrame {
     Connection conexion;
     PreparedStatement pst;
     ResultSet rs;
+    chats cs = new chats();
+    public String usuario = "";
+    
     
     public jflogin() {
         initComponents();
@@ -193,6 +196,8 @@ public class jflogin extends javax.swing.JFrame {
                     {
                         jfUser us = new jfUser();
                         us.setVisible(true);
+                        if(cs.agregarNuevoChat(user)){}
+                        usuario = user;
                     }
                     // LIMPIAR FORMULARIO
                     tuser.setText("");

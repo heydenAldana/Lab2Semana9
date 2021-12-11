@@ -64,7 +64,9 @@ public class chats
             if(c.get(i).getUsuario().equals(usuario))
             {
                 c.remove(i);
+                return true;
             }
         }
+        return false;
     }
 }
