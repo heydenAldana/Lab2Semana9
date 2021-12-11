@@ -73,18 +73,36 @@ public class jfUser extends javax.swing.JFrame {
         tmensaje.setBackground(new java.awt.Color(255, 255, 255));
         tmensaje.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         tmensaje.setForeground(new java.awt.Color(51, 51, 51));
+        tmensaje.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tmensajeKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tmensajeKeyTyped(evt);
+            }
+        });
 
         bborrar.setBackground(new java.awt.Color(0, 153, 153));
         bborrar.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         bborrar.setForeground(new java.awt.Color(204, 204, 204));
         bborrar.setText("Borrar chat");
         bborrar.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 255, 255), new java.awt.Color(0, 51, 51)));
+        bborrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bborrarMouseClicked(evt);
+            }
+        });
 
         bsalir.setBackground(new java.awt.Color(255, 153, 153));
         bsalir.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         bsalir.setForeground(new java.awt.Color(102, 0, 0));
         bsalir.setText("Salir");
         bsalir.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 255, 255), new java.awt.Color(0, 51, 51)));
+        bsalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bsalirMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -135,6 +153,33 @@ public class jfUser extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bborrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bborrarMouseClicked
+        // borrar todo en el text area
+        tchat.setText("");
+    }//GEN-LAST:event_bborrarMouseClicked
+
+    private void bsalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bsalirMouseClicked
+        // devuelve al login
+        jflogin l = new jflogin();
+        l.setVisible(true);
+        tmensaje.setText("");
+        tchat.setText("");
+        this.hide();
+    }//GEN-LAST:event_bsalirMouseClicked
+
+    private void tmensajeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tmensajeKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER)
+        {
+            tchat.append(tmensaje.getText());
+            tmensaje.setText("");
+        }
+    }//GEN-LAST:event_tmensajeKeyPressed
+
+    private void tmensajeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tmensajeKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tmensajeKeyTyped
 
     /**
      * @param args the command line arguments
